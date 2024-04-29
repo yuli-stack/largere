@@ -46,20 +46,18 @@ if (isset($_SESSION['user'])){
             $result = mysqli_query($conn, $sql);
 
             $rowCount = mysqli_query($conn,$sql);
-            if ($rowCount >0){
-
-            }
+            
             if (count($error)>0){
-                foreach ($error as $ $erro){
+                foreach ($error as $erro){
                     echo "<div class ='alert alert-danger'>$erro</div>";
                 }
             }else{
-            $sql = "INSERT INTO users (full_name, email, password) VALUES ( ?, ?, ? )";
+            $sql = "INSERT INTO users (`fullname`, `email`, `password`) VALUES ( ?, ?, ? )";
 
             $stmt = mysqli_stmt_init($conn);
             $prepareStmt = mysqli_stmt_prepare($stmt,$sql);
             if ($prepareStmt){
-                mysqli_stmt_bind_param($stmt,"sss",$fullName,$email,$passwordHash);
+                mysqli_stmt_bind_param($stmt,"sss",$fullname,$email,$passwordHash);
                 mysqli_stmt_execute($stmt);
                 echo "<div class= 'alert alert-success'> you are registered  successfully.</div>";
 
